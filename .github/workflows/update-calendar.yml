@@ -19,12 +19,10 @@ jobs:
         run: pip install CalendarFusion
 
       - name: Run calendar script
-        run: python generate_calendar.py
+        run: python generate_calendar.py  
 
       - name: Commit & push calendar/calendar updates
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "📅 Update calendar and daily note files"
-          file_pattern: |
-            README.md
-            Days/*.md
+          file_pattern: .
