@@ -3,7 +3,7 @@
 calendar.py — generates a 9-week Markdown calendar and daily note files
 for Python‑for‑DevOps learning tracker.
 """
-
+import os
 import datetime
 from calendar import month_name
 
@@ -141,7 +141,7 @@ def main():
     readme = mk_readme()
     with open("README.md", "w") as f:
         f.write(readme)
-
+    os.makedirs("Days", exist_ok=True)
     day = START_DATE
     for idx, title in enumerate(DAY_TITLES, start=1):
         # skip Sundays
@@ -150,6 +150,7 @@ def main():
             day += datetime.timedelta(days=(7 - weekday))
         fname = f"Days/{day.isoformat()}.md"
         content = mk_day_file(day, title, idx)
+    
         with open(fname, "w") as f:
             f.write(content)
         day += datetime.timedelta(days=1)
